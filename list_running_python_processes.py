@@ -50,10 +50,11 @@ def main():
             name = proc.info['name'] or ''
             pid = proc.info['pid']
             cmdline = proc.info['cmdline'] or []
+            version = get_python_version(cmdline)
             mem_percent = proc.info['memory_percent']
             cmd = ' '.join(cmdline[:4])+('...' if len(cmdline) > 4 else '')
             
-            
+            print(f"{name:<10} {pid:<8} {version:<10} {mem_percent:.1f}%  {cmd}")
         except(psutil.NoSuchProcess, psutil.AccessDenied):
             continue
 
